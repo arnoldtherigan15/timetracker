@@ -165,4 +165,13 @@ class BuddyController extends Controller
         } 
              
     }
+
+    /**
+     * buddy log time
+     */
+
+     public function logTime(Buddy $buddy)
+     {
+        return view('admin.buddy.log', compact('buddy'));
+     }
 }

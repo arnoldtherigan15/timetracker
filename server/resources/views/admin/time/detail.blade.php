@@ -8,9 +8,9 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header card-header-text card-header-primary">
-                    <div class="card-text">
-                        <h4 class="card-title">{{ $record['date'] }}</h4>
-                    </div>
+                        <div class="card-text">
+                            <h4 class="card-title">{{ $record['date'] }}</h4>
+                        </div>
                     </div>
                     <div class="card-body text-center">
                         <span class="badge badge-primary" style="font-size:20px">{{ $record['total_time'] }}</span>
