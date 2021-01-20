@@ -52,6 +52,8 @@ RUN chmod -R 777 /var/www/html
 
 # RUN cp /var/www/html/.env.example /var/www/html/.env
 
+# RUN php artisan key:generate
+
 # RUN php artisan migrate
 
 # RUN php artisan storage:link

@@ -61,3 +61,5 @@ services:
       wakatime-network:
         ipv4_address: 172.7.0.3
 
+# Insert into container wakatime-php
+# docker exec -it wakatime-php sh
