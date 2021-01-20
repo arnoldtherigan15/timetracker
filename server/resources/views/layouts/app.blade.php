@@ -16,8 +16,7 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <meta charset="utf-8" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+  <link rel="icon" href="https://i.pinimg.com/originals/04/b3/0c/04b30cb706a04eaa45403a231c2f4937.png" type="image/icon type">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>{{ $title ?? config('app.name') }} - Time Tracker</title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -65,7 +64,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </li>
                 <li class="nav-item {{ Request::is('admin/buddy*') ? ' active' :  '' }}">
                     <a class="nav-link" href="{{ route('admin.buddy.index') }}">
-                    <i class="material-icons">person</i>
+                    <i class="material-icons">people_alt</i>
                     <p>Buddy</p>
                     </a>
                 </li>
@@ -93,21 +92,26 @@ The above copyright notice and this permission notice shall be included in all c
                 <span class="navbar-toggler-icon icon-bar"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end">
+                  
+                  <form class="navbar-form">
 
-                <ul class="navbar-nav">
+                  </form>
+                  <ul class="navbar-nav">
+                  {{-- <ul class="navbar-n ./ av"> --}}
 
-                    <li class="nav-item dropdown">
-                    <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">person</i>
-                        <p class="d-lg-none d-md-block">
-                        Account
-                        </p>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                        <a onclick="logout()" class="dropdown-item" style="cursor: pointer">Log out</a>
-                    </div>
-                    </li>
-                </ul>
+                      <li class="nav-item dropdown">
+                      <a class="nav-link" href="#" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="material-icons">person</i>
+                          <p class="d-lg-none d-md-block">
+                          Account
+                          </p>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                          <a onclick="logout()" class="dropdown-item" style="cursor: pointer">Log out</a>
+                      </div>
+                      </li>
+
+                  </ul>
                 </div>
             </div>
             </nav>

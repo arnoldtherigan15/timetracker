@@ -49,7 +49,7 @@
                             Batch
                             </th>
                             <th>
-                            api_key
+                            log time
                             </th>
                             <th class="text-right">
                             Action
@@ -69,7 +69,9 @@
                                 {{ $buddy->batch }}
                             </td>
                             <td>
-                                {{ $buddy->api_key }}
+                                <a class="btn btn-primary" href="{{ route('admin.buddy.logTime', $buddy->id) }}">
+                                    detail
+                                </a>
                             </td>
                             <td class="text-right">
                                 <a class="btn btn-success" href="{{ route('admin.buddy.edit', $buddy->id) }}">
