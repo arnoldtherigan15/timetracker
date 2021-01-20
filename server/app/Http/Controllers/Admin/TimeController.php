@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buddy;
+use App\Models\LogTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -28,6 +29,7 @@ class TimeController extends Controller
         // date: el.range.text,
         //   totalTime: el.grand_total.text,
         //   projects: el.projects,
+        
         foreach ($response['data'] as $el) {
             $records[] = [
                 'date' => $el['range']['text'],
@@ -35,6 +37,24 @@ class TimeController extends Controller
                 'projects' => $el['projects']
             ];
         }
+        
+        /**
+         * Log yesterday total wakatime to LogTime  
+         */
+        $date = date("Y-m-d",strtotime("-1 days")); // get system yesterday date
+        $dataYesterday = $response['data'][count($response['data'])-3]; // -3 because total array on response is 9 and array start by 0, so for get yesterday data must be -3
+        if(isset($buddy->id)) {
+            if($dataYesterday["range"]['date'] == $date) {
+                LogTime::firstOrCreate([
+                    "buddy_id" => $buddy->id,
+                    "date" => $date
+                ],[
+                    "total_hours" => $dataYesterday['grand_total']['hours'],
+                    "total_minutes" => $dataYesterday['grand_total']['minutes'],
+                ]);
+            }
+        }
+        
         return view('admin.time.detail', compact('records','buddy'));
     }
 }
