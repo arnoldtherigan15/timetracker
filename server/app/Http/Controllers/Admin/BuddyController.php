@@ -184,10 +184,11 @@ class BuddyController extends Controller
      public function compare(Request $request, Buddy $buddy){
         
         $startDate = date("Y-m-d",strtotime("-21 days"));
-        $endDate = date("Y-m-d");
+        $endDate = date("Y-m-d", strtotime("-1 days"));
         $buddyIds = Buddy::where('id' ,'>' ,0)->get('id');
         $buddiesLogTime = LogTime::whereIn("buddy_id", $buddyIds)
         ->WhereBetween('date', [$startDate, $endDate] )
+        ->orderBy('date')
         ->with('buddy')
         ->get();
         // return Response::json($buddiesLogTime);
