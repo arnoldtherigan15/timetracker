@@ -185,13 +185,12 @@ class BuddyController extends Controller
         
         $startDate = date("Y-m-d",strtotime("-21 days"));
         $endDate = date("Y-m-d", strtotime("-1 days"));
-        $buddyIds = Buddy::where('id' ,'>' ,0)->get('id');
+        $buddyIds = Buddy::where('user_id','=', auth()->user()->id)->get('id');
         $buddiesLogTime = LogTime::whereIn("buddy_id", $buddyIds)
         ->WhereBetween('date', [$startDate, $endDate] )
         ->orderBy('date')
         ->with('buddy')
         ->get();
-        // return Response::json($buddiesLogTime);
 
         return view('admin.buddy.compare', compact('buddiesLogTime'));
      }
