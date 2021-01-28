@@ -185,8 +185,8 @@ class BuddyController extends Controller
         
         $startDate = date("Y-m-d",strtotime("-21 days"));
         $endDate = date("Y-m-d");
-        $buddyIds = $request -> buddyIds;
-        $buddiesLogTime = LogTime::whereIn("buddy_id", [1,2])
+        $buddyIds = Buddy::where('id' ,'>' ,0)->get('id');
+        $buddiesLogTime = LogTime::whereIn("buddy_id", $buddyIds)
         ->WhereBetween('date', [$startDate, $endDate] )
         ->with('buddy')
         ->get();
