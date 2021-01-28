@@ -46,16 +46,23 @@
     };
     
     let datasets = []
-    
+    let colors = Object.keys(window.chartColors).reverse()
+    let colorIdx = 0
     _.forOwn(buddies, (value, key) => { 
       color = randomColor()
+      console.log('---------->', key)
+      let totalTime = 0
+      value.forEach( (val) => {
+        totalTime += +`${val.total_hours}.${val.total_minutes}`
+      })
       datasets.push({
-        label: key,
+        label: `${key} ${totalTime.toFixed(2)} jam`,
         fill: false,
-        backgroundColor:color,
-        borderColor: color,
+        backgroundColor: colors[colorIdx],
+        borderColor: colors[colorIdx],
         data: value.map( val => +`${val.total_hours}.${val.total_minutes}`)
       })
+      colorIdx++
     });
  
 
@@ -70,7 +77,7 @@
             callbacks: {
                 label: function(tooltipItem, data) {
                   var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                  return `${label} ${tooltipItem.yLabel} jam`
+                  return `${label.split(" ")[0]} ${tooltipItem.yLabel} jam`
                 },
                
             }
