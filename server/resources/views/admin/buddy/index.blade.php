@@ -30,6 +30,7 @@
                             <h4 class="card-title">Buddy Lists</h4>
                         </div>
                         <div class="col-md-6 text-right">
+                            <a href="{{ route('admin.buddy.compare') }}" class="btn btn-default">Compare</a>
                             <a href="{{ route('admin.buddy.showImport') }}" class="btn btn-default">Upload Excel</a>
                         </div>
                    </div>

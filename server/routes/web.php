@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('/buddy', BuddyController::class, ['as' => 'admin']);
         Route::get('/buddy/log-time/{buddy}', [BuddyController::class, 'logTime'])->name('admin.buddy.logTime');
+        Route::get('/buddy-compare', [BuddyController::class, 'compare'])->name('admin.buddy.compare');
 
         Route::get('/importBuddy', [BuddyController::class, 'importExportView'])->name('admin.buddy.showImport');
         Route::post('/importBuddy', [BuddyController::class, 'import'])->name('admin.buddy.import');

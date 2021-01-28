@@ -36,6 +36,14 @@ class TimeController extends Controller
                 'total_time' => $el['grand_total']['text'],
                 'projects' => $el['projects']
             ];
+            // save every logtime from wakatime to database
+            LogTime::firstOrCreate([
+                "buddy_id" => $buddy->id,
+                "date" => date("Y-m-d", strtotime($el['range']['text']  ))
+            ],[
+                "total_hours" => $el['grand_total']['hours'],
+                "total_minutes" => $el['grand_total']['minutes'],
+            ]);
         }
         
         /**
@@ -44,15 +52,16 @@ class TimeController extends Controller
         $date = date("Y-m-d",strtotime("-1 days")); // get system yesterday date
         $dataYesterday = $response['data'][count($response['data'])-3]; // -3 because total array on response is 9 and array start by 0, so for get yesterday data must be -3
         if(isset($buddy->id)) {
-            if($dataYesterday["range"]['date'] == $date) {
-                LogTime::firstOrCreate([
-                    "buddy_id" => $buddy->id,
-                    "date" => $date
-                ],[
-                    "total_hours" => $dataYesterday['grand_total']['hours'],
-                    "total_minutes" => $dataYesterday['grand_total']['minutes'],
-                ]);
-            }
+            
+            // if($dataYesterday["range"]['date'] == $date) {
+            //     LogTime::firstOrCreate([
+            //         "buddy_id" => $buddy->id,
+            //         "date" => $date
+            //     ],[
+            //         "total_hours" => $dataYesterday['grand_total']['hours'],
+            //         "total_minutes" => $dataYesterday['grand_total']['minutes'],
+            //     ]);
+            // }
         }
         
         return view('admin.time.detail', compact('records','buddy'));

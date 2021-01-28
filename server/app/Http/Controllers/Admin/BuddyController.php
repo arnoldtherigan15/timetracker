@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Response;
 use App\Http\Controllers\Controller;
 use App\Imports\BuddiesImport;
 use App\Models\Buddy;
+use App\Models\LogTime;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Maatwebsite\Excel\Facades\Excel;
@@ -174,4 +176,24 @@ class BuddyController extends Controller
      {
         return view('admin.buddy.log', compact('buddy'));
      }
+
+     /**
+      *  compare timetracker between buddies
+     */
+
+     public function compare(Request $request, Buddy $buddy){
+        
+        $startDate = date("Y-m-d",strtotime("-21 days"));
+        $endDate = date("Y-m-d", strtotime("-1 days"));
+        $buddyIds = Buddy::where('id' ,'>' ,0)->get('id');
+        $buddiesLogTime = LogTime::whereIn("buddy_id", $buddyIds)
+        ->WhereBetween('date', [$startDate, $endDate] )
+        ->orderBy('date')
+        ->with('buddy')
+        ->get();
+        // return Response::json($buddiesLogTime);
+
+        return view('admin.buddy.compare', compact('buddiesLogTime'));
+     }
+     
 }
