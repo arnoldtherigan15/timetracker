@@ -41,6 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
             color: #ffffff !important;
         }
   </style>
+  @yield('js_top')
 </head>
 
 <body>
@@ -433,6 +434,8 @@ The above copyright notice and this permission notice shall be included in all c
             })
         }
   </script>
+
+  @yield('js_bottom')
 
 </body>
 
