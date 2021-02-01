@@ -18,17 +18,13 @@ class TimeController extends Controller
 
     public function detail(Buddy $buddy)
     {
-        // $jwt_token = Config::get('app.jwt_token_zoom');
         $start_date = date('Y-m-d', strtotime("-7 day"));
-        $end_date = date('Y-m-d', strtotime("+1 day"));
-
-        // dd($start_date);
-        // dd($buddy->api_key);
+        $end_date = date('Y-m-d');
         $response = Http::get('https://wakatime.com/api/v1/users/current/summaries?start='.$start_date.'&end='.$end_date.'&api_key='.$buddy->api_key.'&timeout=10')->json();
         $records = [];
-        // date: el.range.text,
-        //   totalTime: el.grand_total.text,
-        //   projects: el.projects,
+        
+        $new_records = $response['data'];
+        array_pop($new_records);
         
         foreach ($response['data'] as $el) {
             $records[] = [
@@ -36,6 +32,9 @@ class TimeController extends Controller
                 'total_time' => $el['grand_total']['text'],
                 'projects' => $el['projects']
             ];
+            
+        }
+        foreach ($new_records as $el) {
             // save every logtime from wakatime to database
             LogTime::firstOrCreate([
                 "buddy_id" => $buddy->id,
@@ -44,24 +43,6 @@ class TimeController extends Controller
                 "total_hours" => $el['grand_total']['hours'],
                 "total_minutes" => $el['grand_total']['minutes'],
             ]);
-        }
-        
-        /**
-         * Log yesterday total wakatime to LogTime  
-         */
-        $date = date("Y-m-d",strtotime("-1 days")); // get system yesterday date
-        $dataYesterday = $response['data'][count($response['data'])-3]; // -3 because total array on response is 9 and array start by 0, so for get yesterday data must be -3
-        if(isset($buddy->id)) {
-            
-            // if($dataYesterday["range"]['date'] == $date) {
-            //     LogTime::firstOrCreate([
-            //         "buddy_id" => $buddy->id,
-            //         "date" => $date
-            //     ],[
-            //         "total_hours" => $dataYesterday['grand_total']['hours'],
-            //         "total_minutes" => $dataYesterday['grand_total']['minutes'],
-            //     ]);
-            // }
         }
         
         return view('admin.time.detail', compact('records','buddy'));
