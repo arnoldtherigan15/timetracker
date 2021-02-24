@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row justify-content-center align-items-center h-100">
-    <div class="col-4 col-md-5 col-sm-8">
+    <div class="col-10 col-md-5 col-sm-8">
         <div class="login-form rounded shadow p-5" style="background: RGBA(255, 255, 255, .8)">
             <div class="" style="text-align: center;">
                 <h3 class="mb-4">Time Tracker</h3>

@@ -15,8 +15,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+  <link rel="icon" href="https://i.pinimg.com/originals/04/b3/0c/04b30cb706a04eaa45403a231c2f4937.png" type="image/icon type">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>{{ $title ?? config('app.name') }} - Time Tracker</title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -29,7 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
 </head>
 
-<body style="height: 100vh;background-image:url({{asset('assets/img/fox.jpg')}}); background-position:center;background-size:cover;width:100vw">
+<body style="height: 100vh;background-image:url({{asset('assets/img/fox.jpg')}}); background-position:center;background-size:cover;width:100vw;overflow-x:hidden">
 
 
     @yield('content')

@@ -15,4 +15,9 @@ class Buddy extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function log()
+    {
+        return $this->hasMany(LogTime::class);
+    }
 }

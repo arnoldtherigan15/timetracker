@@ -30,6 +30,7 @@
                             <h4 class="card-title">Buddy Lists</h4>
                         </div>
                         <div class="col-md-6 text-right">
+                            <a href="{{ route('admin.buddy.compare') }}" class="btn btn-default">Compare</a>
                             <a href="{{ route('admin.buddy.showImport') }}" class="btn btn-default">Upload Excel</a>
                         </div>
                    </div>
@@ -49,7 +50,7 @@
                             Batch
                             </th>
                             <th>
-                            api_key
+                            log time
                             </th>
                             <th class="text-right">
                             Action
@@ -69,7 +70,9 @@
                                 {{ $buddy->batch }}
                             </td>
                             <td>
-                                {{ $buddy->api_key }}
+                                <a class="btn btn-primary" href="{{ route('admin.buddy.logTime', $buddy->id) }}">
+                                    detail
+                                </a>
                             </td>
                             <td class="text-right">
                                 <a class="btn btn-success" href="{{ route('admin.buddy.edit', $buddy->id) }}">
