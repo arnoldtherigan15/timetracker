@@ -6,6 +6,7 @@
 <div class="content container" style="min-height: 80vh">
     <div class="row">
         <div class="col-md-12">
+            <a href="" class="btn btn-primary float-right">Download Excel</a>
             
             {{-- TABLE --}}
             <div class="card">
