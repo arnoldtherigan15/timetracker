@@ -7,6 +7,8 @@ use App\Models\Buddy;
 use App\Models\LogTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LogTimeExport;
 
 class TimeController extends Controller
 {
@@ -48,15 +50,14 @@ class TimeController extends Controller
         return view('admin.time.detail', compact('records','buddy'));
     }
 
-    public function export(Buddy $buddy) {
-        // dd($buddy->log()->whereBetween('created_at', [$startDate, $endDate]);
-        $start_date = date('Y-m-d', strtotime("-7 day"));
-        $end_date = date('Y-m-d');
+    public function exportByBuddyId(Buddy $buddy) {
+        $name = preg_replace('/\s+/', '-', $buddy->name);
 
-        $log = LogTime::where('buddy_id','=', $buddy->id)
-                        ->orderBy('created_at', 'desc')
-                        ->take(1000) // take limit 1000
-                        ->get();
-        dd($log);
+        try {
+            return Excel::download(new LogTimeExport($buddy->id), 'log-buddy-'.$name.'.xlsx');
+        } catch (QueryException $e) {
+            $failures = $e->errorInfo;
+            return back()->withErrors($failures[2]);
+        } 
     }
 }
