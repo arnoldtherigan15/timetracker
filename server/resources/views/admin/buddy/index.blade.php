@@ -30,6 +30,9 @@
                             <h4 class="card-title">Buddy Lists</h4>
                         </div>
                         <div class="col-md-6 text-right">
+                            @if ($buddies->count() > 0) 
+                            <a href="{{ route('admin.time.export.all') }}" class="btn btn-default">Download Log Time Excel</a>
+                            @endif
                             <a href="{{ route('admin.buddy.compare') }}" class="btn btn-default">Compare</a>
                             <a href="{{ route('admin.buddy.showImport') }}" class="btn btn-default">Upload Excel</a>
                         </div>

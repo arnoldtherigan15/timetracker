@@ -6,7 +6,8 @@
 <div class="content container" style="min-height: 80vh">
     <div class="row">
         <div class="col-md-12">
-            
+            <a href="{{ route('admin.time.export', $buddy->id) }}" class="btn btn-primary float-right">Download Excel</a>
+
             {{-- TABLE --}}
             <div class="card">
                 <div class="card-body">
@@ -21,10 +22,7 @@
                             Date
                             </th>
                             <th>
-                            Total Hours
-                            </th>
-                            <th>
-                            Total Minutes
+                            Total Time
                             </th>
                         </thead>
                         @endif
@@ -38,10 +36,7 @@
                                 {{ dateID($log->date) }}
                             </td>
                             <td>
-                                {{ $log->total_hours }}
-                            </td>
-                            <td>
-                                {{ $log->total_minutes }}
+                                {{ $log->total_hours }} Hours {{ $log->total_minutes }} Minutes
                             </td>
                             </tr>
                             @empty

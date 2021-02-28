@@ -42,6 +42,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/importBuddy', [BuddyController::class, 'import'])->name('admin.buddy.import');
 
         Route::get('/time', [TimeController::class, 'index'])->name('admin.time.index');
+        Route::get('/time/export', [TimeController::class, 'export'])->name('admin.time.export.all');
         Route::get('/time/{buddy}', [TimeController::class, 'detail'])->name('admin.time.detail');
+        Route::get('/time/{buddy}/export', [TimeController::class, 'exportByBuddyId'])->name('admin.time.export');
     });
 });
