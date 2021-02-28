@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LogTimeExport;
+use App\Exports\LogTimeBuddyExport;
 
 class TimeController extends Controller
 {
@@ -55,6 +56,15 @@ class TimeController extends Controller
 
         try {
             return Excel::download(new LogTimeExport($buddy->id), 'log-buddy-'.$name.'.xlsx');
+        } catch (QueryException $e) {
+            $failures = $e->errorInfo;
+            return back()->withErrors($failures[2]);
+        } 
+    }
+
+    public function export() {
+        try {
+            return Excel::download(new LogTimeBuddyExport, 'log-wakatime-student.xlsx');
         } catch (QueryException $e) {
             $failures = $e->errorInfo;
             return back()->withErrors($failures[2]);
