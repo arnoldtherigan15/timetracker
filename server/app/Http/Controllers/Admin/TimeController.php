@@ -47,4 +47,16 @@ class TimeController extends Controller
         
         return view('admin.time.detail', compact('records','buddy'));
     }
+
+    public function export(Buddy $buddy) {
+        // dd($buddy->log()->whereBetween('created_at', [$startDate, $endDate]);
+        $start_date = date('Y-m-d', strtotime("-7 day"));
+        $end_date = date('Y-m-d');
+
+        $log = LogTime::where('buddy_id','=', $buddy->id)
+                        ->orderBy('created_at', 'desc')
+                        ->take(1000) // take limit 1000
+                        ->get();
+        dd($log);
+    }
 }
