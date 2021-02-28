@@ -21,10 +21,7 @@
                             Date
                             </th>
                             <th>
-                            Total Hours
-                            </th>
-                            <th>
-                            Total Minutes
+                            Total Time
                             </th>
                         </thead>
                         @endif
@@ -38,10 +35,7 @@
                                 {{ dateID($log->date) }}
                             </td>
                             <td>
-                                {{ $log->total_hours }}
-                            </td>
-                            <td>
-                                {{ $log->total_minutes }}
+                                {{ $log->total_hours }} Hours {{ $log->total_minutes }} Minutes
                             </td>
                             </tr>
                             @empty
