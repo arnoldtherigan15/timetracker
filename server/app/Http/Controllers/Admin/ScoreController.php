@@ -29,7 +29,6 @@ class ScoreController extends Controller
     {
         $week = Score::WEEK;
         $phase = Phase::all();
-        $phase = Phase::all();
         
         return view('admin.score.create', compact('week', 'phase', 'buddy'));
     }
@@ -49,7 +48,6 @@ class ScoreController extends Controller
             "week" => $request->week,
             "notes" => $request->notes,
         ];
-        
 
         try {
             Score::firstOrCreate($payloads);
@@ -79,7 +77,10 @@ class ScoreController extends Controller
      */
     public function edit(Score $score)
     {
-        //
+        $week = Score::WEEK;
+        $phase = Phase::all();
+        // dd($score->score);
+        return view('admin.score.edit', compact('score', 'week', 'phase'));
     }
 
     /**
@@ -91,7 +92,18 @@ class ScoreController extends Controller
      */
     public function update(Request $request, Score $score)
     {
-        //
+        try {
+            $score->phase_id = $request->phase_id;
+            $score->buddy_id = $request->buddy_id;
+            $score->week = $request->week;
+            $score->score = $request->score;
+            $score->notes = $request->notes;
+            $score->save();
+
+            return redirect()->route('admin.buddy.score', $request->buddy_id)->with(['success' => 'SUCCESS TO UPDATE DATA']);
+        } catch (QueryException $e) {
+            return redirect()->route('admin.buddy.score', $request->buddy_id)->with(['error' => 'FAILED TO UPDATE DATA']);
+        } 
     }
 
     /**
