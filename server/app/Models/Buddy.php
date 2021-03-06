@@ -20,4 +20,9 @@ class Buddy extends Model
     {
         return $this->hasMany(LogTime::class);
     }
+    
+    public function score()
+    {
+        return $this->hasMany(Score::class, 'buddy_id');
+    }
 }
