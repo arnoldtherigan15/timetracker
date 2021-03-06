@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
         
         Route::prefix('score')->group(function () {
             Route::get('/buddy/{buddy}', [ScoreController::class, 'index'])->name('admin.buddy.score');
-            Route::get('/buddy/report/{id}', [ScoreController::class, 'generateReport'])->name('admin.buddy.score.report-pdf');
+            Route::get('/buddy/report/{id}', [ScoreController::class, 'report'])->name('admin.buddy.score.report');
         });
 
     });
