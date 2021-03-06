@@ -95,6 +95,7 @@ class ScoreController extends Controller
     ])->find($id);
 
     $name = preg_replace('/\s+/', '-', $report->buddy->name);
+
     $badge = 'bronze';
     $status = 'Danger';
     $color = 'red';
@@ -111,6 +112,39 @@ class ScoreController extends Controller
                 $status = 'Warning';
                 $badge = 'silver';
                 $color = 'orange';
+            }
+        } else if($report->week == 2) {
+            $maxScore = 37.50;
+            if ($report->score >= 28) {
+                $status = 'Saved';
+                $badge = 'gold';
+                $color = 'green';
+            } else if($report->score >= 21) {
+                $status = 'Warning';
+                $badge = 'silver';
+                $color = 'orange';
+            }
+        } else if($report->week == 3) {
+            $maxScore = 60;
+            if ($report->score >= 45) {
+                $status = 'Saved';
+                $badge = 'gold';
+                $color = 'green';
+            } else if($report->score >= 33) {
+                $status = 'Warning';
+                $badge = 'silver';
+                $color = 'orange';
+            }
+        } else if($report->week == 4) {
+            $maxScore = 15;
+            if ($report->score >= 70) {
+                $status = 'Saved';
+                $badge = 'gold';
+                $color = 'green';
+            } else {
+                $status = 'Repeat / DO';
+                $badge = 'Bronze';
+                $color = 'Red';
             }
         }
     }
