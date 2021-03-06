@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Score;
 use App\Models\Buddy;
 use Illuminate\Http\Request;
-use Spatie\Browsershot\Browsershot;
 
 class ScoreController extends Controller
 {
@@ -90,17 +89,32 @@ class ScoreController extends Controller
     }
 
     
-  public function generateReport($id) {
+  public function report($id) {
     $report = Score::with([
       'buddy'
     ])->find($id);
 
     $name = preg_replace('/\s+/', '-', $report->buddy->name);
-    // dd($report->week, $name);
-    // $pdf = PDF::loadView('P'.$report->phase->name.' Week '.$report->week.' - '.$name, $report)->setPaper('legal', 'landscape');
+    $badge = 'bronze';
+    $status = 'Danger';
+    $color = 'red';
+    $maxScore = 15;
+    
+    if($report->phase->name == "Phase 1") {
+        if($report->week == 1) {
+            $maxScore = 15;
+            if ($report->score >= 11) {
+                $status = 'Saved';
+                $badge = 'gold';
+                $color = 'green';
+            } else if($report->score >= 8) {
+                $status = 'Warning';
+                $badge = 'silver';
+                $color = 'orange';
+            }
+        }
+    }
 
-    // $pdf = PDF::loadView('admin.score.week-report', $report)->setPaper('legal', 'landscape');
-    // return $pdf->stream('P'.$report->phase->name.' Week '.$report->week.' - '.$name.'.pdf');
-    // Browsershot::html('<h1>Hello world!!</h1>')->save('example.pdf');
+    return view('admin.score.week-report', compact('report', 'status', 'badge', 'maxScore', 'color'));
   }
 }
