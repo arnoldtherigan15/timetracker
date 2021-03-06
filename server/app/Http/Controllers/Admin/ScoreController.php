@@ -59,17 +59,6 @@ class ScoreController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Score  $score
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Score $score)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Score  $score
@@ -112,9 +101,17 @@ class ScoreController extends Controller
      * @param  \App\Models\Score  $score
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Score $score)
+    public function destroy(Buddy $buddy)
     {
-        //
+        try {
+            $score = Score::findOrFail($id);
+            $buddy_id = Buddy::findOrFail($score->buddy_id);
+            $score->delete();
+
+            return redirect()->route('admin.buddy.score', $buddy_id)->with(['success' => 'SUCCESS TO DELETE DATA']);
+        } catch (QueryException $e) {
+            return redirect()->route('admin.buddy.score', $buddy_id)->with(['error' => 'FAILED TO DELETE DATA']);
+        } 
     }
 
     
