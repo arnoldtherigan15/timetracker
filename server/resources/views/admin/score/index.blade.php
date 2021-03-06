@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Score - '.$buddyName])
+@extends('layouts.app', ['title' => 'Score - '.$buddy->name])
 
 @section('content')
 <!-- main content -->
@@ -15,13 +15,14 @@
                             <h4 class="card-title">Score Lists</h4>
                         </div>
                         <div class="col-md-6 text-right">
+                            <a href="{{ route('admin.score.create', $buddy->id) }}" class="btn btn-default">Input Score</a>
                         </div>
                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                        @if ($score->count())
+                        @if ($buddy->score->count())
                         <thead class=" text-primary">
                             <th>
                             No
@@ -41,7 +42,7 @@
                         </thead>
                         @endif
                         <tbody>
-                            @forelse ($score as $no => $item)
+                            @forelse ($buddy->score as $no => $item)
                             <tr>
                                 <th>
                                     {{ $no+1 }}
