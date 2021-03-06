@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Score;
+use App\Models\Buddy;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class ScoreController extends Controller
 {
@@ -12,9 +15,12 @@ class ScoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Buddy $buddy)
     {
-        //
+        $score = $buddy->score;
+        $buddyName = $buddy->name;
+
+        return view('admin.score.index', compact('score', 'buddyName'));
     }
 
     /**
@@ -82,4 +88,19 @@ class ScoreController extends Controller
     {
         //
     }
+
+    
+  public function generateReport($id) {
+    $report = Score::with([
+      'buddy'
+    ])->find($id);
+
+    $name = preg_replace('/\s+/', '-', $report->buddy->name);
+    // dd($report->week, $name);
+    // $pdf = PDF::loadView('P'.$report->phase->name.' Week '.$report->week.' - '.$name, $report)->setPaper('legal', 'landscape');
+
+    // $pdf = PDF::loadView('admin.score.week-report', $report)->setPaper('legal', 'landscape');
+    // return $pdf->stream('P'.$report->phase->name.' Week '.$report->week.' - '.$name.'.pdf');
+    // Browsershot::html('<h1>Hello world!!</h1>')->save('example.pdf');
+  }
 }

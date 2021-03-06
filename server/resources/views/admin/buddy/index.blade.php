@@ -78,6 +78,9 @@
                                 </a>
                             </td>
                             <td class="text-right">
+                                <a class="btn btn-secondary" href="{{ route('admin.buddy.score', $buddy->id) }}">
+                                    <i class="fa fa-star"></i>
+                                </a>
                                 <a class="btn btn-success" href="{{ route('admin.buddy.edit', $buddy->id) }}">
                                     <i class="fa fa-pencil"></i>
                                 </a>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BuddyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TimeController;
+use App\Http\Controllers\Admin\ScoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,5 +46,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/time/export', [TimeController::class, 'export'])->name('admin.time.export.all');
         Route::get('/time/{buddy}', [TimeController::class, 'detail'])->name('admin.time.detail');
         Route::get('/time/{buddy}/export', [TimeController::class, 'exportByBuddyId'])->name('admin.time.export');
+
+        
+        Route::prefix('score')->group(function () {
+            Route::get('/buddy/{buddy}', [ScoreController::class, 'index'])->name('admin.buddy.score');
+            Route::get('/buddy/report/{id}', [ScoreController::class, 'generateReport'])->name('admin.buddy.score.report-pdf');
+        });
+
     });
 });
