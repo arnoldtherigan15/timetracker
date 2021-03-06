@@ -60,6 +60,9 @@
                                 <a class="btn btn-primary" href="{{ route('admin.buddy.score.report', $item->id) }}"  title="See Report">
                                     <i class="fa fa-file"></i>
                                 </a>
+                                <a class="btn btn-success" href="{{ route('admin.score.edit', $item->id) }}"  title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                             </td>
                             </tr>
                             @empty
