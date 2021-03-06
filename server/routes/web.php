@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function () {
 
         
         Route::prefix('score')->group(function () {
+            Route::post('/buddy/store', [ScoreController::class, 'store'])->name('admin.score.store');
+            Route::get('/buddy/create/{buddy}', [ScoreController::class, 'create'])->name('admin.score.create');
             Route::get('/buddy/{buddy}', [ScoreController::class, 'index'])->name('admin.buddy.score');
             Route::get('/buddy/report/{id}', [ScoreController::class, 'report'])->name('admin.buddy.score.report');
         });

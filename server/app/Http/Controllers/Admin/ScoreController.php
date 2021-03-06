@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Score;
 use App\Models\Buddy;
+use App\Models\Phase;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -16,10 +17,7 @@ class ScoreController extends Controller
      */
     public function index(Buddy $buddy)
     {
-        $score = $buddy->score;
-        $buddyName = $buddy->name;
-
-        return view('admin.score.index', compact('score', 'buddyName'));
+        return view('admin.score.index', compact('buddy'));
     }
 
     /**
@@ -27,9 +25,13 @@ class ScoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Buddy $buddy)
     {
-        //
+        $week = Score::WEEK;
+        $phase = Phase::all();
+        $phase = Phase::all();
+        
+        return view('admin.score.create', compact('week', 'phase', 'buddy'));
     }
 
     /**
@@ -40,7 +42,22 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payloads = [
+            "buddy_id" => $request->buddy_id,
+            "phase_id" => $request->phase_id,
+            "score" => $request->score,
+            "week" => $request->week,
+            "notes" => $request->notes,
+        ];
+        
+
+        try {
+            Score::firstOrCreate($payloads);
+
+            return redirect()->route('admin.buddy.score', $request->buddy_id)->with(['success' => 'SUCCESS TO CREATE NEW DATA']);
+        } catch (QueryException $e) {
+            return redirect()->route('admin.buddy.score', $request->buddy_id)->with(['error' => 'FAILED TO CREATE NEW DATA']);
+        } 
     }
 
     /**

@@ -11,6 +11,13 @@ class Score extends Model
 
     protected $fillable = ['buddy_id', "phase_id", "score", "notes", "week"];
 
+    public const WEEK = [
+        'Week 1' => 1,
+        'Week 2' => 2,
+        'Week 3' => 3,
+        'Week 4' => 4,
+    ];
+
     public function buddy()
     {
         return $this->belongsTo(Buddy::class, 'buddy_id');
