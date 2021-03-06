@@ -56,7 +56,7 @@
                                 {{ $item->score }}
                             </td>
                             <td>
-                                <a class="btn btn-primary" href="{{ route('admin.buddy.score.report-pdf', $item->id) }}">
+                                <a class="btn btn-primary" href="{{ route('admin.buddy.score.report-pdf', $item->id) }}"  title="See Report">
                                     <i class="fa fa-file"></i>
                                 </a>
                             </td>

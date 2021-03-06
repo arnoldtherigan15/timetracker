@@ -78,13 +78,13 @@
                                 </a>
                             </td>
                             <td class="text-right">
-                                <a class="btn btn-secondary" href="{{ route('admin.buddy.score', $buddy->id) }}">
+                                <a class="btn btn-secondary" href="{{ route('admin.buddy.score', $buddy->id) }}" title="See Score">
                                     <i class="fa fa-star"></i>
                                 </a>
-                                <a class="btn btn-success" href="{{ route('admin.buddy.edit', $buddy->id) }}">
+                                <a class="btn btn-success" href="{{ route('admin.buddy.edit', $buddy->id) }}"  title="Edit">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <button class="btn btn-danger" onClick="Delete({{ $buddy->id }})">
+                                <button class="btn btn-danger" onClick="Delete({{ $buddy->id }})" title="Delete">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>

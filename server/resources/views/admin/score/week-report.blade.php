@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Report Week 1</title>
+    <title>Report Week {{ $report->week }}</title>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/alphardex/aqua.css@master/dist/aqua.min.css'>
     <!-- <link rel="stylesheet" href="./style.css"> -->
     <style>
@@ -83,44 +83,38 @@
         <!-- partial:index.partial.html -->
         <form class="login-form" action="javascript:void(0);">
             <div class="">
-                <img src="./badge-gold.png" alt="" style="width: 20%; display: block; margin: auto;">
+                <img src="{{ asset('assets/img/badge-'.$badge.'.png') }}" alt="" style="width: 20%; display: block; margin: auto;">
             </div>
             <br>
-            <h1>Report Week 1</h1>
+            <h1>Report Week {{ $report->week }}</h1>
             <div class="form-input-material">
-                <input type="text" name="username" id="username" placeholder=" " value="Teddy koerniadi"
+                <input type="text" name="username" id="username" placeholder=" " value="{{ $report->buddy->name ?? 'Missing Something' }}"
                     autocomplete="off" class="form-control-material" required disabled style="font-size: larger;" />
                 <label for="username">Student Name</label>
             </div>
 
             <div class="form-input-material">
-                <input type="text" name="username" id="username" placeholder=" " value="RMT-10" autocomplete="off"
+                <input type="text" name="username" id="username" placeholder=" " value="{{ $report->buddy->batch ?? 'Missing Something' }}" autocomplete="off"
                     class="form-control-material" required disabled style="font-size: larger;" />
                 <label for="username">Batch</label>
             </div>
 
             <div class="form-input-material">
-                <input type="text" name="username" id="username" placeholder=" " value="Saved" autocomplete="off"
-                    class="form-control-material" required disabled style="font-size: larger; color: green;" />
+                <input type="text" name="username" id="username" placeholder=" " value="{{ $status }}" autocomplete="off"
+                    class="form-control-material" required disabled style="font-size: larger; color: {{ $color }};" />
                 <label for="username">Status</label>
             </div>
 
             <div class="form-input-material">
-                <input type="text" name="username" id="username" placeholder=" " value="80 - 90" autocomplete="off"
+                <input type="text" name="username" id="username" placeholder=" " value="{{ $report->score }}" autocomplete="off"
                     class="form-control-material" required disabled style="font-size: larger;" />
-                <label for="username">Week Range Score </label>
-            </div>
-
-            <div class="form-input-material">
-                <input type="text" name="username" id="username" placeholder=" " value="0 - 0" autocomplete="off"
-                    class="form-control-material" required disabled style="font-size: larger;" />
-                <label for="username">Absent - Late</label>
+                <label for="username">Week Range Score (Max: {{ $maxScore }})</label>
             </div>
         </form>
 
         <br>
         <h1>Notes:</h1>
-        <p style="width: auto;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto ut similique molestiae reiciendis, odio distinctio quisquam! Quae libero deserunt officia dolorum excepturi eius impedit ipsum, corrupti accusantium molestias eum enim!</p>
+        <p style="width: auto;">{{ $report->notes }}</p>
     </div>
 </body>
 
